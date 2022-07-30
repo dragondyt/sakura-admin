@@ -1,11 +1,9 @@
 <template>
-$END$
+  <div>tst</div>
 </template>
 
-<script>
-export default {
-name: "index.vue"
-}
+<script lang="ts" setup>
+
 </script>
 
 <style scoped>

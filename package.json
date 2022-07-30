@@ -1,5 +1,5 @@
 {
-  "name": "blogManager",
+  "name": "@dragondyt/blog-manager",
   "description": "application created by thinkjs",
   "version": "1.0.0",
   "author": "dragondyt@yandex.com",
@@ -28,5 +28,6 @@
   },
   "devDependencies": {
     "typescript": "^2.5.3"
-  }
+  },
+  "private": "true"
 }

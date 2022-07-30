@@ -1,5 +1,6 @@
 import 'thinkjs3-ts';
 import path from 'path';
+import Console from 'think-logger3';
 import nunjucks from 'think-view-nunjucks';
 import fileSession from 'think-session-file';
 import fileCache from 'think-cache-file';
@@ -42,4 +43,38 @@ export const view = {
   nunjucks: {
     handle: nunjucks
   }
+};
+
+export const model = {
+  type: 'mongo',
+  common: {
+    logSql: true,
+    logger: (msg: string) => think.logger.info(msg),
+  },
+
+  mongo: {
+    host: ['cluster0-shard-00-00.mwmcp.mongodb.net', 'cluster0-shard-00-01.mwmcp.mongodb.net', 'cluster0-shard-00-02.mwmcp.mongodb.net'],
+    port: [27017],
+    user: 'blog',
+    password: 'VEnOE6URIWFI7Whb',
+    database: 'myFirstDatabase',
+    options: {
+      ssl: true,
+      replicaSet: 'atlas-38gwia-shard-0',
+      authSource: 'admin',
+      retryWrites: true,
+      w: 'majority'
+    },
+  },
+};
+
+/**
+ * logger adapter config
+ * @type {Object}
+ */
+export const logger = {
+  type: 'console',
+  console: {
+    handle: Console,
+  },
 };

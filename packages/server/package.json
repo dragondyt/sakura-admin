@@ -1,16 +1,23 @@
 {
-  "name": "@dragondyt/sakura-server",
+  "name": "server",
   "description": "application created by thinkjs",
   "version": "1.0.0",
-  "author": "dragondyt@yandex.com",
+  "author": "dragondyt <20499679+dragondyt@users.noreply.github.com>",
   "scripts": {
     "start": "node development.js",
     "compile": "npm run lint && tsc",
     "lint": "tslint \"src/**/*.ts\""
   },
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.8.1",
+    "request-promise-native": "^1.0.9",
     "think-cache": "^1.1.1",
     "think-cache-file": "^1.1.1",
+    "think-helper": "^1.1.3",
+    "think-logger3": "^1.3.1",
+    "think-model": "^1.5.4",
+    "think-mongo": "^2.2.1",
     "think-session": "^1.1.5",
     "think-session-file": "^1.1.2",
     "think-view": "^1.0.12",
@@ -21,10 +28,11 @@
   "devDependencies": {
     "@types/koa": "*",
     "node-notifier": "^5.0.2",
-    "think-watcher": "^3.0.0",
     "think-inspect": "0.0.2",
     "think-typescript": "^1.0.4",
-    "tslint": "^5.8.0"
+    "think-watcher": "^3.0.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.5.3"
   },
   "repository": "",
   "license": "MIT",
@@ -34,11 +42,11 @@
   "readmeFilename": "README.md",
   "thinkjs": {
     "metadata": {
-      "name": "blogManager",
+      "name": "server",
       "description": "application created by thinkjs",
-      "author": "dragondyt@yandex.com"
+      "author": "dragondyt <20499679+dragondyt@users.noreply.github.com>"
     },
-    "projectName": "blogManager",
+    "projectName": "server",
     "template": "typescript",
     "clone": false,
     "isMultiModule": false
