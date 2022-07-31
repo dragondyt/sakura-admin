@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@dragondyt/sakura-server": "latest"
+    "@dragondyt/sakura-server": "latest",
+    "@vercel/node": "^2.5.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
   }
 }
