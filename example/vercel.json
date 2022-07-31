@@ -5,7 +5,6 @@
   },
   "functions": {
     "**/*" : {
-      "runtime": "@vercel/node"
     }
   }
 }
