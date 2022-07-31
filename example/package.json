@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@dragondyt/sakura-server": "workspace:*",
+    "@dragondyt/sakura-server": "latest",
     "@vercel/node": "^2.5.2"
   }
 }
