@@ -1,6 +1,5 @@
 {
   "name": "@dragondyt/sakura-admin",
-  "private": true,
   "version": "1.0.0",
   "type": "module",
   "main": "dist/admin.js",

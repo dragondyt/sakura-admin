@@ -8,6 +8,7 @@
     "compile": "tsc",
     "lint": "tslint \"src/**/*.ts\""
   },
+  "files": ["lib"],
   "dependencies": {
     "@koa/cors": "^3.3.0",
     "debug": "^4.3.4",
