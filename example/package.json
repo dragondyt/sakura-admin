@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@dragondyt/sakura-server": "latest",
-    "@vercel/node": "^2.5.2",
-    "tslib": "^2.4.0"
+    "@dragondyt/sakura-server": "latest"
   }
 }

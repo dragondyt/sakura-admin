@@ -18,9 +18,11 @@ importers:
     specifiers:
       '@dragondyt/sakura-server': latest
       '@vercel/node': ^2.5.2
+      tslib: ^2.4.0
     dependencies:
       '@dragondyt/sakura-server': link:../packages/server
       '@vercel/node': 2.5.2
+      tslib: 2.4.0
 
   packages/admin:
     specifiers:
@@ -4866,7 +4868,6 @@ packages:
 
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
-    dev: true
 
   /tslint/5.20.1:
     resolution: {integrity: sha512-EcMxhzCFt8k+/UP5r8waCf/lzmeSyVlqxqMEDQE7rWYiQky8KpIBz1JAoYXfROHrPZ1XXd43q8yQnULOLiBRQg==}
