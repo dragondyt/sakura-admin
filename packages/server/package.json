@@ -5,7 +5,8 @@
   "author": "dragondyt <20499679+dragondyt@users.noreply.github.com>",
   "scripts": {
     "start": "node development.js",
-    "compile": "tsc",
+    "build": "tsc",
+    "clean": "rimraf lib",
     "lint": "tslint \"src/**/*.ts\""
   },
   "files": ["lib"],
