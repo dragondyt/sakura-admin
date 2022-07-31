@@ -5,6 +5,7 @@
   },
   "functions": {
     "**/*" : {
+      "runtime": "Node.js"
     }
   }
 }
