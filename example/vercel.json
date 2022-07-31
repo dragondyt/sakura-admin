@@ -3,10 +3,10 @@
   "github": {
     "silent": true
   },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "index.ts"
+  "functions": {
+    "/(.*)" : {
+      "runtime": "@vercel/node",
+      "includeFiles": "index.ts"
     }
-  ]
+  }
 }
