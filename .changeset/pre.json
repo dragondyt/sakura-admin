@@ -4,8 +4,8 @@
   "initialVersions": {
     "@dragondyt/blog-manager": "1.0.0",
     "template": "1.0.0",
-    "@dragondyt/sakura-admin": "2.0.0-beta.0",
-    "@dragondyt/sakura-server": "2.0.0-beta.0"
+    "@dragondyt/sakura-admin": "2.0.0-beta.1",
+    "@dragondyt/sakura-server": "2.0.0-beta.1"
   },
   "changesets": []
 }
