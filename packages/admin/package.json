@@ -1,11 +1,13 @@
 {
   "name": "@dragondyt/sakura-admin",
-  "version": "1.0.0",
+  "version": "2.0.0-beta.0",
   "type": "module",
   "main": "dist/admin.js",
   "browser": "dist/admin.js",
   "module": "dist/admin.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/vite-lib.es.js",

@@ -6,7 +6,11 @@
   "scripts": {
     "build": "pnpm --filter=@dragondyt/** run build",
     "clear": "pnpm --filter=@dragondyt/** run clean",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
     "server:dev": "vercel dev ./example --listen 9090",
+    "release": "pnpm build && pnpm release:only",
+    "release:only": "changeset publish --registry=https://registry.npmjs.com/",
     "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {

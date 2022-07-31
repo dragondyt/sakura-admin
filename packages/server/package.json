@@ -1,7 +1,7 @@
 {
   "name": "@dragondyt/sakura-server",
   "description": "application created by thinkjs",
-  "version": "1.0.0",
+  "version": "2.0.0-beta.0",
   "author": "dragondyt <20499679+dragondyt@users.noreply.github.com>",
   "scripts": {
     "start": "node development.js",
@@ -9,7 +9,9 @@
     "clean": "rimraf lib",
     "lint": "tslint \"src/**/*.ts\""
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@koa/cors": "^3.3.0",
     "debug": "^4.3.4",

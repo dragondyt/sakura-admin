@@ -1,0 +1,14 @@
+{
+  "mode": "exit",
+  "tag": "beta",
+  "initialVersions": {
+    "@dragondyt/blog-manager": "1.0.0",
+    "template": "1.0.0",
+    "@dragondyt/sakura-admin": "1.0.0",
+    "@dragondyt/sakura-server": "1.0.0"
+  },
+  "changesets": [
+    "afraid-coins-dream",
+    "red-glasses-act"
+  ]
+}
