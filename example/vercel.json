@@ -3,12 +3,11 @@
   "github": {
     "silent": true
   },
-  "builds": [
-    {
-      "src": "index.ts",
-      "use": "@vercel/node"
+  "functions": {
+    "index.ts": {
+      "maxDuration": 10
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
