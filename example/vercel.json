@@ -3,9 +3,16 @@
   "github": {
     "silent": true
   },
-  "functions": {
-    "**/*" : {
-      "runtime": "Node.js"
+  "builds": [
+    {
+      "src": "index.ts",
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "index.ts"
+    }
+  ]
 }
