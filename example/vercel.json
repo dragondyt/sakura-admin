@@ -4,9 +4,8 @@
     "silent": true
   },
   "functions": {
-    "/**/*" : {
-      "runtime": "@vercel/node",
-      "includeFiles": "index.ts"
+    "**/*" : {
+      "runtime": "@vercel/node"
     }
   }
 }
