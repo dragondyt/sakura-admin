@@ -4,30 +4,39 @@
   "version": "1.0.0",
   "author": "dragondyt@yandex.com",
   "scripts": {
-    "build": "pnpm build:all && pnpm build:copy",
-    "build:all": "pnpm -r --stream build",
-    "build:copy": "pnpm --parallel --stream copy",
-    "build:tsc": "tsc -b tsconfig.build.json",
-    "build:tsup": "pnpm --filter=@vuepress/client --filter=@vuepress/shared --parallel --stream build",
-    "clean": "pnpm --parallel --stream clean",
-    "dev:copy": "pnpm build:copy --watch",
-    "dev:tsc": "pnpm build:tsc --watch",
-    "dev:tsup": "pnpm build:tsup --watch",
-    "docs:build": "pnpm --filter=docs docs:build",
-    "docs:clean": "pnpm --filter=docs docs:clean",
-    "docs:dev": "pnpm --filter=docs docs:dev",
-    "docs:release": "pnpm build && pnpm docs:build",
-    "docs:serve": "pnpm --filter=docs docs:serve",
-    "lint": "eslint --fix --ext .js,.ts,.vue .",
-    "release": "pnpm release:check && pnpm release:version && pnpm release:publish",
-    "release:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release:check": "pnpm lint && pnpm clean && pnpm build && pnpm test",
-    "release:publish": "pnpm -r publish --tag next",
-    "release:version": "bumpp package.json packages/*/package.json packages/@vuepress/*/package.json --execute=\"pnpm release:changelog\" --commit \"build: publish v%s\" --all --tag --push",
-    "test": "jest --runInBand"
+    "admin:analyze": "npm --dir=packages/admin analyze",
+    "admin:build": "pnpm --dir=packages/admin build",
+    "admin:dev": "pnpm --dir=packages/admin dev",
+    "apidoc": "apidoc -i packages/server/src/logic -o docs/src/.vuepress/dist/api",
+    "build": "pnpm admin:build && pnpm client:build",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "clean": "lerna run clean --stream",
+    "client:build": "pnpm --dir=packages/client build",
+    "client:dev": "pnpm --dir=packages/client dev",
+    "docs:build": "pnpm --dir=docs run build && pnpm apidoc",
+    "docs:dev": "pnpm --dir=docs run dev",
+    "lint": "pnpm lint:eslint && pnpm lint:prettier && pnpm lint:stylelint",
+    "lint:eslint": "eslint --ext .js,.vue,.ts --fix .",
+    "lint:prettier": "prettier --check --write .",
+    "lint:stylelint": "stylelint packages/*/src/**/*.scss --fix",
+    "prepare": "husky install",
+    "server:dev": "vercel dev ./example --listen 9090",
+    "test": "vitest"
   },
   "devDependencies": {
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "vercel": "27.2.0"
   },
-  "private": "true"
+  "private": "true",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "@types/react",
+        "react",
+        "react-dom",
+        "typescript"
+      ]
+    }
+  }
 }

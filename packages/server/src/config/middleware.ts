@@ -1,8 +1,13 @@
 import 'thinkjs3-ts';
 import path from 'path';
+const routerREST = require('think-router-rest');
 const isDev = think.env === 'development';
 
 export = [
+  {
+    handle: 'dashboard',
+    match: /^\/ui/,
+  },
   {
     handle: 'meta',
     options: {
@@ -37,6 +42,7 @@ export = [
     handle: 'router',
     options: {}
   },
+  { handle: routerREST },
   'logic',
   'controller'
 ];

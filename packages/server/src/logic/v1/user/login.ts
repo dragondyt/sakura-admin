@@ -1,4 +1,5 @@
-export default class extends think.Logic {
+import BaseLogic from "../..";
+export default class extends BaseLogic {
   indexAction() {
   }
 }
