@@ -9,21 +9,21 @@ Deploy your own Waline project with Vercel.
 ### How We Created This Example
 
 ```js
-//index.ts
+//index.js
 const Waline = require('@waline/vercel');
 module.exports = Waline();
 //vercel.json
 {
   "builds": [
     {
-      "src": "index.ts",
+      "src": "index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "index.ts"
+      "dest": "index.js"
     }
   ]
 }

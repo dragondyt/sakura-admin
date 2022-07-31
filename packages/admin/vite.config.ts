@@ -14,7 +14,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   return {
     build: {
       lib: {
-        entry: 'src/index.ts',
+        entry: 'src/index.js',
         name: 'admin', // 起个名字，安装、引入用
         fileName: (format) => `admin.${format}.js` // 打包后的文件名
       },

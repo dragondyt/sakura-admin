@@ -17,10 +17,8 @@ importers:
   example:
     specifiers:
       '@dragondyt/sakura-server': latest
-      typescript: ^4.7.4
     dependencies:
       '@dragondyt/sakura-server': link:../packages/server
-      typescript: 4.7.4
 
   packages/admin:
     specifiers:
