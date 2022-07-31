@@ -5,10 +5,12 @@
   "author": "dragondyt <20499679+dragondyt@users.noreply.github.com>",
   "scripts": {
     "start": "node development.js",
-    "compile": "npm run lint && tsc",
+    "compile": "tsc",
     "lint": "tslint \"src/**/*.ts\""
   },
   "dependencies": {
+    "@koa/cors": "^3.3.0",
+    "debug": "^4.3.4",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.8.1",
     "think-cache": "^1.1.1",
@@ -27,13 +29,12 @@
     "thinkjs3-ts": "^1.0.1"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.7",
     "@types/koa": "*",
     "node-notifier": "^5.0.2",
     "think-inspect": "0.0.2",
-    "think-typescript": "^1.0.4",
     "think-watcher": "^3.0.0",
-    "tslint": "^5.8.0",
-    "typescript": "^2.5.3"
+    "tslint": "^5.8.0"
   },
   "repository": "",
   "license": "MIT",

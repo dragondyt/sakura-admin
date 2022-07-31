@@ -1,9 +1,9 @@
 {
   "name": "template",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@dragondyt/sakura-server": "workspace:^1.0.0",
+    "@dragondyt/sakura-server": "workspace:*",
     "@vercel/node": "^2.5.2"
   }
 }

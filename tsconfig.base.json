@@ -16,7 +16,7 @@
     "importHelpers": true,
     "inlineSourceMap": false,
     "inlineSources": false,
-    "lib": ["DOM", "ESNext"],
+    "lib": ["DOM", "ES2020"],
     "listEmittedFiles": false,
     "module": "ES2020",
     "moduleResolution": "node",
@@ -37,6 +37,6 @@
     "strict": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "es2020"
+    "target": "es2021"
   }
 }

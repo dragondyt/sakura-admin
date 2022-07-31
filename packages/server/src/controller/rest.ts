@@ -1,16 +1,19 @@
 import Base from "../service/storage/base";
 
-export default class extends think.Controller {
+export default class BaseController extends think.Controller {
     static get _REST() {
         return true;
+    }
+    static get _method() {
+        return 'method';
     }
     post(): any {
         return super.post();
     }
 
-    resource: string;
+    resource: string | undefined;
     id: string;
-    modelInstance: Base;
+    modelInstance: Base | undefined;
 
     constructor(ctx: ThinkContext) {
         super(ctx);

@@ -1,48 +1,58 @@
-import 'thinkjs3-ts';
-import path from 'path';
+const cors = require('@koa/cors');
 const routerREST = require('think-router-rest');
 const isDev = think.env === 'development';
+const isTcb = think.env === 'cloudbase';
+const isDeta = think.env === 'deta' || process.env.DETA_RUNTIME === 'true';
+const isAliyunFC =
+    think.env === 'aliyun-fc' || Boolean(process.env.FC_RUNTIME_VERSION);
 
-export = [
+export default [
   {
     handle: 'dashboard',
     match: /^\/ui/,
   },
+
   {
     handle: 'meta',
     options: {
       logRequest: isDev,
-      sendResponseTime: isDev
-    }
+      sendResponseTime: isDev,
+      requestTimeoutCallback: isTcb || isDeta || isAliyunFC ? false : () => {},
+    },
   },
-  {
-    handle: 'resource',
-    enable: isDev,
-    options: {
-      root: path.join(think.ROOT_PATH, 'www'),
-      publicPath: /^\/(static|favicon\.ico)/
-    }
-  },
+  { handle: cors },
+
   {
     handle: 'trace',
     enable: !think.isCli,
     options: {
-      debug: isDev
-    }
+      debug: true,
+      contentType: () => 'json',
+      error(err: any, ctx: any) {
+        if (/favicon.ico$/.test(ctx.url)) {
+          return;
+        }
+        // tslint:disable-next-line:no-console
+        console.error(err);
+      },
+    },
   },
+
   {
     handle: 'payload',
     options: {
-      uploadDir: path.join(think.RUNTIME_PATH, '_tmp'),
       keepExtensions: true,
-      limit: '5mb'
-    }
+      limit: '5mb',
+    },
   },
+
   {
     handle: 'router',
-    options: {}
+    options: {},
   },
+
   { handle: routerREST },
+
   'logic',
-  'controller'
+  'controller',
 ];
