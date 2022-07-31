@@ -1,7 +1,7 @@
 {
   "name": "@dragondyt/sakura-server",
   "description": "application created by thinkjs",
-  "version": "2.0.0-beta.0",
+  "version": "0.0.1",
   "author": "dragondyt <20499679+dragondyt@users.noreply.github.com>",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

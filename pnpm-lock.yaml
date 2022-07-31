@@ -16,7 +16,7 @@ importers:
 
   example:
     specifiers:
-      '@dragondyt/sakura-server': workspace:*
+      '@dragondyt/sakura-server': latest
       '@vercel/node': ^2.5.2
     dependencies:
       '@dragondyt/sakura-server': link:../packages/server
