@@ -1,6 +1,6 @@
 {
   "name": "@dragondyt/sakura-admin",
-  "version": "0.0.1",
+  "version": "1.0.0-beta.0",
   "type": "module",
   "main": "dist/admin.js",
   "browser": "dist/admin.js",
