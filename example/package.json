@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@dragondyt/sakura-server": "workspace:*"
+    "@dragondyt/sakura-server": "latest"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
