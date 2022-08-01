@@ -1,17 +1,17 @@
 {
   "name": "@dragondyt/sakura-admin",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "type": "module",
-  "main": "dist/admin.js",
-  "browser": "dist/admin.js",
-  "module": "dist/admin.js",
+  "main": "dist/admin.es.js",
+  "browser": "dist/admin.es.js",
+  "module": "dist/admin.es.js",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/vite-lib.es.js",
-      "require": "./dist/vite-lib.umd.js"
+      "import": "./dist/admin.es.js",
+      "require": "./dist/admin.umd.js"
     }
   },
   "scripts": {

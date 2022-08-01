@@ -1,16 +1,15 @@
-import * as Application from "thinkjs";
 import * as path from "path";
 import * as os from "os";
 // @ts-ignore
-import * as Loader from "thinkjs/lib/loader";
-import * as debug from 'debug';
-debug.enable("think-*");
+const Loader = require("thinkjs/lib/loader");
+import {withAxiom} from "next-axiom";
+import Application from "thinkjs3-ts";
+
 export default function Route(configParams: any = {}) {
-    const { env, ...config } = configParams;
-    // @ts-ignore
+    const {env, ...config} = configParams;
     const app = new Application({
         ROOT_PATH: __dirname,
-        APP_PATH: path.join(__dirname, ''),
+        APP_PATH: path.join(__dirname, 'src'),
         RUNTIME_PATH: path.join(os.tmpdir(), 'runtime'),
         proxy: true, // use proxy
         env: env || 'vercel',
@@ -30,7 +29,7 @@ export default function Route(configParams: any = {}) {
             })
             .then(() => {
                 const callback = think.app.callback();
-                return callback(req, res);
+                return withAxiom(callback(req, res));
             })
             .then(() => {
                 think.app.emit('appReady');
