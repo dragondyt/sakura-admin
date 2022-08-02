@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import { store } from '@/store';
+import {login} from "@/api/v1/user";
 export interface IUserState {
     token: string;
     username: string;
@@ -10,6 +11,18 @@ export interface IUserState {
 }
 export const useUserStore = defineStore({
     id: 'app-user',
+    actions: {
+        // 登录
+        async login(userInfo: {}) {
+            try {
+                console.log("login")
+                const response = await login(userInfo);
+                return Promise.resolve(response);
+            }catch (e) {
+                return Promise.reject(e);
+            }
+        }
+    }
 })
 // Need to be used outside the setup
 export function useUserStoreWidthOut() {

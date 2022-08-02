@@ -1,6 +1,12 @@
 import Base from "./base";
 import {ObjectId} from "mongodb";
-export default class Mongodb extends Base {
+interface MongodbInstance {
+    order(order: string): void;
+    limit(offset: number, limit: number): void;
+    field(field: any): void;
+    select(): Promise<any>;
+}
+export default class Mongodb extends Base<MongodbInstance> {
     async select(where: any, {desc, limit, offset, field}: any = {}): Promise<any> {
         const instance = this.mongo(this.tableName);
         this.where(instance, where);

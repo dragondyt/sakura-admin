@@ -1,9 +1,9 @@
-export default abstract  class Base extends think.Service {
+export default abstract  class Base<M = any> extends think.Service {
     tableName: string;
-    mongo: any;
+    mongo: (tableName: string) => M;
     protected constructor(tableName: string) {
         super();
         this.tableName = tableName;
     }
-    protected abstract select<T>(where: any, {}: any): Promise<T>;
+    public abstract select<T>(where: any, {}?: any): Promise<T>;
 }

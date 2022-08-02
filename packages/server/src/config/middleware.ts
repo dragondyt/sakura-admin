@@ -9,7 +9,7 @@ const isAliyunFC =
 export default [
   {
     handle: 'dashboard',
-    match: /^\//,
+    match: '/',
   },
 
   {
