@@ -1,6 +1,6 @@
 import {CreateAxiosOptions, RequestOptions, Result} from "@/utils/http/axios/types";
 import {AxiosTransform, VAxios} from './axios';
-import { deepMerge } from '@/utils';
+import {deepMerge} from '@/utils';
 import axios, {AxiosResponse} from "axios";
 import {useUserStoreWidthOut} from "@/store/modules/user";
 import {ContentTypeEnum, RequestEnum, ResultEnum} from "@/enums/httpEnum";
@@ -9,7 +9,7 @@ import router from "@/router";
 import {isString} from "lodash-es";
 import {PageEnum} from "@/enums/pageEnum";
 import {isUrl} from "@/utils/is";
-import {formatRequestDate} from "@/utils/http/axios/helper";
+import {formatRequestDate, joinTimestamp} from "@/utils/http/axios/helper";
 import {checkStatus} from "@/utils/http/axios/checkStatus";
 import {setObjToUrlParams} from "@/utils/urlUtils";
 
@@ -51,9 +51,9 @@ const transform: AxiosTransform = {
             throw new Error('请求出错，请稍候重试');
         }
         //  这里 code，result，message为 后台统一的字段，需要修改为项目自己的接口返回格式
-        const { code, result, message } = data;
+        const { errno: code, data: result, errmsg: message } = data;
         // 请求成功
-        const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
+        const hasSuccess = data && Reflect.has(data, 'errno') && code === ResultEnum.SUCCESS;
         // 是否显示提示信息
         if (isShowMessage) {
             if (hasSuccess && (successMessageText || isShowSuccessMessage)) {
@@ -75,7 +75,6 @@ const transform: AxiosTransform = {
                 });
             }
         }
-
         // 接口请求成功，直接返回结果
         if (code === ResultEnum.SUCCESS) {
             return result;

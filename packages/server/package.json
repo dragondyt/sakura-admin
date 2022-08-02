@@ -9,6 +9,7 @@
     "start": "node development.js",
     "build": "tsc",
     "clean": "rimraf lib",
+    "dev": "rimraf lib && tsc",
     "lint": "tslint \"src/**/*.ts\""
   },
   "files": [

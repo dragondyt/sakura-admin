@@ -40,19 +40,17 @@ export const model = {
         logger: (msg: string) => think.logger.info(msg),
     },
     mongo: {
-        host: MONGO_HOST
-            ? MONGO_HOST.startsWith('[')
-                ? JSON.parse(MONGO_HOST)
-                : MONGO_HOST
-            : '127.0.0.1',
-        port: MONGO_PORT
-            ? MONGO_PORT.startsWith('[')
-                ? JSON.parse(MONGO_PORT)
-                : MONGO_PORT
-            : 27017,
-        user: MONGO_USER,
-        password: MONGO_PASSWORD,
-        database: MONGO_DB,
-        options: mongoOpt,
-    },
+        host: ['cluster0-shard-00-00.mwmcp.mongodb.net', 'cluster0-shard-00-01.mwmcp.mongodb.net', 'cluster0-shard-00-02.mwmcp.mongodb.net'],
+        port: [27017],
+        user: 'blog',
+        password: 'VEnOE6URIWFI7Whb',
+        database: 'myFirstDatabase',
+        options: {
+            ssl: true,
+            replicaSet: 'atlas-38gwia-shard-0',
+            authSource: 'admin',
+            retryWrites: true,
+            w: 'majority'
+        },
+    }
 };

@@ -6,10 +6,10 @@
       :rules="rules"
       :size="size"
   >
-    <n-form-item label="姓名" path="username">
-      <n-input v-model:value="formValue.username" placeholder="输入姓名"/>
+    <n-form-item label="邮箱" path="email">
+      <n-input v-model:value="formValue.email" placeholder="输入姓名"/>
     </n-form-item>
-    <n-form-item label="年龄" path="password">
+    <n-form-item label="密码" path="password">
       <n-input v-model:value="formValue.password" placeholder="输入年龄"/>
     </n-form-item>
     <n-form-item>
@@ -21,9 +21,12 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, reactive} from 'vue'
+import {reactive, ref} from 'vue'
 import {useMessage} from 'naive-ui'
 import {useUserStore} from "@/store/modules/user";
+import {ResultEnum} from "@/enums/httpEnum";
+import {useRoute, useRouter} from "vue-router";
+import {PageEnum} from "@/enums/pageEnum";
 
 const formRef = ref();
 const size = ref<'small' | 'medium' | 'large'>('medium')
@@ -32,27 +35,35 @@ const rules = {
   password: {required: true, message: '请输入密码', trigger: 'blur'},
 };
 const formValue = reactive({
-  username: '',
+  email: '',
   password: '',
   isCaptcha: true,
 })
 const loading = ref(false);
 const message = useMessage();
 const userStore = useUserStore();
+const route = useRoute();
+const router = useRouter();
+const LOGIN_NAME = PageEnum.BASE_LOGIN_NAME;
 
 function handleLoginClick(e: KeyboardEvent): void {
   e.preventDefault();
   formRef.value.validate(async (errors: any) => {
     if (!errors) {
-      const {username, password} = formValue;
       message.loading('登录中...');
       loading.value = true;
       try {
-        const {code, message: msg} = await userStore.login({username, password});
-        console.log(message)
+        const {errno, errmsg} = await userStore.login(formValue);
         message.destroyAll();
-      } catch (e) {
-
+        if (errno == ResultEnum.SUCCESS) {
+          const toPath = decodeURIComponent((route.query?.redirect || '/') as string);
+          message.success('登录成功，即将进入系统');
+          if (route.name === LOGIN_NAME) {
+            await router.replace('/');
+          } else await router.replace(toPath);
+        } else {
+          message.info(errmsg || '登录失败');
+        }
       } finally {
         loading.value = false
       }

@@ -58,8 +58,8 @@ export interface RequestOptions {
 }
 
 export interface Result<T = any> {
-    code: number;
+    errno: number;
     type?: 'success' | 'error' | 'warning';
-    message: string;
-    result?: T;
+    errmsg: string;
+    data?: T;
 }
