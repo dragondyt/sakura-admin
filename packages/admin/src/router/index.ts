@@ -3,7 +3,13 @@ import {App} from "vue";
 import {createRouterGuards} from './router-guards';
 import {PageEnum} from "@/enums/pageEnum";
 import {Layout, RedirectRoute} from "@/router/base";
+const modules: Record<any, any> = import.meta.glob('./modules/**/*.ts', { eager: true })
 const routeModuleList: RouteRecordRaw[] = [];
+Object.keys(modules).forEach((key) => {
+    const mod = modules[key].default || {};
+    const modList = Array.isArray(mod) ? [...mod] : [mod];
+    routeModuleList.push(...modList);
+});
 export const RootRoute: RouteRecordRaw = {
     path: '/',
     name: 'Root',
@@ -24,29 +30,8 @@ export const LoginRoute: RouteRecordRaw = {
 //需要验证权限
 export const asyncRoutes = [...routeModuleList];
 
-export const otherRoute: RouteRecordRaw[] = [
-    {
-        path: '/dashboard',
-        name: 'Dashboard',
-        redirect: '/dashboard/console',
-        component: Layout,
-        meta: {
-            icon: 'DashboardOutlined',
-            title: 'Dashboard',
-        },
-        children: [{
-            path: 'console',
-            name: 'dashboard_console',
-            component: () => import('@/views/dashboard/console.vue'),
-            meta: {
-                title: '主控台',
-            },
-        },]
-    }
-]
-
 //普通路由 无需验证权限
-export const constantRouter: any[] = [LoginRoute, RootRoute, RedirectRoute, ...otherRoute];
+export const constantRouter: any[] = [LoginRoute, RootRoute, RedirectRoute];
 
 const router = createRouter({
     history: createWebHashHistory(''),

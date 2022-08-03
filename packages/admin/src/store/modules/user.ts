@@ -3,6 +3,8 @@ import {store} from '@/store';
 import {getUserInfo, login} from "@/api/v1/user";
 import {ACCESS_TOKEN, CURRENT_USER} from "@/store/mutation-types";
 import {createStorage} from "@/utils/storage";
+import {storage} from '@/utils/Storage';
+import {ResultEnum} from "@/enums/httpEnum";
 
 const Storage = createStorage({storage: localStorage});
 
@@ -42,6 +44,14 @@ export const useUserStore = defineStore({
         async login(userInfo: {}) {
             try {
                 const response = await login(userInfo);
+                const {data: result, errno: code} = response;
+                if (code === ResultEnum.SUCCESS) {
+                    const ex = 7 * 24 * 60 * 60 * 1000;
+                    storage.set(ACCESS_TOKEN, result.token, ex);
+                    storage.set(CURRENT_USER, result, ex);
+                    this.setToken(result.token);
+                    this.setUserInfo(result);
+                }
                 return Promise.resolve(response);
             } catch (e) {
                 return Promise.reject(e);
@@ -71,6 +81,7 @@ export const useUserStore = defineStore({
         }
     }
 })
+
 // Need to be used outside the setup
 export function useUserStoreWidthOut() {
     return useUserStore(store);

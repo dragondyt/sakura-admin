@@ -1,6 +1,15 @@
 import {isObject} from "@/utils/is";
 import {PageEnum} from "@/enums/pageEnum";
 import {RouteRecordRaw} from "vue-router";
+import {NIcon} from "naive-ui";
+import {DefineComponent, h, VNode} from 'vue';
+
+/**
+ * render 图标
+ * */
+export function renderIcon(icon: any) {
+    return () => h(NIcon, null, {default: () => h(icon)});
+}
 
 export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
     let key: string;
@@ -9,6 +18,7 @@ export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
     }
     return src;
 }
+
 /**
  * 判断根路由 Router
  * */

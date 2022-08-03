@@ -1,7 +1,7 @@
 import BaseController from "../../rest";
 import helper from 'think-helper';
-import * as jose from 'jose';
 import {generateToken} from "../../../utils/jwt";
+import {generateKeyPair, generateSecret, SignJWT} from "jose";
 export default class Login extends BaseController {
     constructor(ctx: ThinkContext) {
         super(ctx);
@@ -20,7 +20,7 @@ export default class Login extends BaseController {
             ...user[0],
             password: undefined,
             mailMd5: helper.md5(user[0].email.toLowerCase()),
-            token: generateToken(),
+            token: await generateToken(),
         });
     }
 }

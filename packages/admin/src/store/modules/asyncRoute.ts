@@ -65,6 +65,9 @@ export const useAsyncRouteStore = defineStore({
     },
   },
   actions: {
+    setDynamicAddedRoute(flag: boolean) {
+      this.isDynamicAddedRoute = flag
+    },
     setKeepAliveComponents(compNames: any[]) {
       // 设置需要缓存的组件
       this.keepAliveComponents = compNames;

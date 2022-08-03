@@ -29,6 +29,7 @@ importers:
     specifiers:
       '@types/lodash-es': ^4.17.6
       '@types/qs': ^6.9.7
+      '@vicons/antd': ^0.12.0
       '@vitejs/plugin-vue': ^3.0.0
       autoprefixer: ^10.4.7
       axios: ^0.27.2
@@ -41,6 +42,7 @@ importers:
       typescript: ^4.6.4
       unplugin-auto-import: ^0.10.2
       unplugin-vue-components: ^0.21.2
+      vditor: ^3.8.15
       vfonts: ^0.0.3
       vite: ^3.0.0
       vue: ^3.2.37
@@ -49,10 +51,12 @@ importers:
     dependencies:
       '@types/lodash-es': 4.17.6
       '@types/qs': 6.9.7
+      '@vicons/antd': 0.12.0
       axios: 0.27.2
       lodash-es: 4.17.21
       pinia: 2.0.17_j6bzmzd4ujpabbp5objtwxyjp4
       qs: 6.11.0
+      vditor: 3.8.15
       vue: 3.2.37
       vue-router: 4.0.13_vue@3.2.37
     devDependencies:
@@ -760,6 +764,10 @@ packages:
       json-schema-to-ts: 1.6.4
       ts-morph: 12.0.0
     dev: true
+
+  /@vicons/antd/0.12.0:
+    resolution: {integrity: sha512-C0p6aO1EmGG1QHrqgUWQS1No20934OdWSRQshM5NIDK5H1On6tC26U0hT6Rmp40KfUsvhvX5YW8BoWJdNFifPg==}
+    dev: false
 
   /@vitejs/plugin-vue/3.0.1_vite@3.0.3+vue@3.2.37:
     resolution: {integrity: sha512-Ll9JgxG7ONIz/XZv3dssfoMUDu9qAnlJ+km+pBA0teYSXzwPCIzS/e1bmwNYl5dcQGs677D21amgfYAnzMl17A==}
@@ -1633,6 +1641,10 @@ packages:
   /didyoumean/1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
     dev: true
+
+  /diff-match-patch/1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
+    dev: false
 
   /diff/4.0.2:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
@@ -5130,6 +5142,12 @@ packages:
       evtd: 0.2.3
       vue: 3.2.37
     dev: true
+
+  /vditor/3.8.15:
+    resolution: {integrity: sha512-BYSBNUuhtvOfu1OU+NhS7R6TcrNP0UmQ8Vtbzq9BnLoG1uIHPZaTjtJIv00OPqHEcZa4KpR7mU+n9P+i+9SHuA==}
+    dependencies:
+      diff-match-patch: 1.0.5
+    dev: false
 
   /vercel/27.2.0:
     resolution: {integrity: sha512-YMLiA2bZU6AJAoia3fecsIsSTnYuHAvMdKU60u14MiI71mkPxff6TO9ZdOZwX6dppTUwzOTgOz3AESwOXNGDtg==}

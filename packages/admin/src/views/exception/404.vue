@@ -1,7 +1,5 @@
 <template>
-  <div>
-    console.vue
-  </div>
+
 </template>
 
 <script lang="ts" setup>
