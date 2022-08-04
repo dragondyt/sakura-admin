@@ -1,59 +1,25 @@
-import {isObject} from "@/utils/is";
-import {PageEnum} from "@/enums/pageEnum";
-import {RouteRecordRaw} from "vue-router";
-import {NIcon} from "naive-ui";
-import {DefineComponent, h, VNode} from 'vue';
+type TargetContext = '_self' | '_parent' | '_blank' | '_top';
 
-/**
- * render 图标
- * */
-export function renderIcon(icon: any) {
-    return () => h(NIcon, null, {default: () => h(icon)});
-}
+export const openWindow = (
+  url: string,
+  opts?: { target?: TargetContext; [key: string]: any }
+) => {
+  const { target = '_blank', ...others } = opts || {};
+  window.open(
+    url,
+    target,
+    Object.entries(others)
+      .reduce((preValue: string[], curValue) => {
+        const [key, value] = curValue;
+        return [...preValue, `${key}=${value}`];
+      }, [])
+      .join(',')
+  );
+};
 
-export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
-    let key: string;
-    for (key in target) {
-        src[key] = isObject(src[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key]);
-    }
-    return src;
-}
+export const regexUrl = new RegExp(
+  '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$',
+  'i'
+);
 
-/**
- * 判断根路由 Router
- * */
-export function isRootRouter(item: RouteRecordRaw) {
-    return item.meta?.alwaysShow != true && item.children?.length === 1;
-}
-
-/**
- * 排除Router
- * */
-export function filterRouter(routerMap: Array<any>) {
-    return routerMap.filter((item) => {
-        return (
-            (item.meta?.hidden || false) != true &&
-            !['/:path(.*)*', '/', PageEnum.REDIRECT, PageEnum.BASE_LOGIN].includes(item.path)
-        );
-    });
-}
-
-export function generatorMenu(routerMap: Array<any>) {
-    return filterRouter(routerMap).map((item) => {
-        const isRoot = isRootRouter(item);
-        const info = isRoot ? item.children[0] : item;
-        const currentMenu = {
-            ...info,
-            ...info.meta,
-            label: info.meta?.title,
-            key: info.name,
-            icon: isRoot ? item.meta?.icon : info.meta?.icon,
-        };
-        // 是否有子菜单，并递归处理
-        if (info.children && info.children.length > 0) {
-            // Recursion
-            currentMenu.children = generatorMenu(info.children);
-        }
-        return currentMenu;
-    });
-}
+export default null;

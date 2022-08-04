@@ -10,6 +10,22 @@ export default class BaseController extends think.Controller {
     post(): any {
         return super.post();
     }
+    success(data?: object | string, message?: string): any {
+        return this.json({
+            data,
+            status: 'ok',
+            msg: message || '请求成功',
+            code: 20000,
+        });
+    }
+    fail(errno: any, errmsg?: string, data?: any): any {
+        return this.json({
+            data,
+            status: 'fail',
+            msg: errmsg,
+            code: errno,
+        });
+    }
 
     resource: string | undefined;
     id: string;

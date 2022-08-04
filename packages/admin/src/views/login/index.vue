@@ -1,79 +1,81 @@
 <template>
-  <n-form
-      ref="formRef"
-      :label-width="80"
-      :model="formValue"
-      :rules="rules"
-      :size="size"
-  >
-    <n-form-item label="邮箱" path="email">
-      <n-input v-model:value="formValue.email" placeholder="输入姓名"/>
-    </n-form-item>
-    <n-form-item label="密码" path="password">
-      <n-input v-model:value="formValue.password" placeholder="输入年龄"/>
-    </n-form-item>
-    <n-form-item>
-      <n-button attr-type="button" @click="handleLoginClick" :loading="loading" :block="true">
-        登录
-      </n-button>
-    </n-form-item>
-  </n-form>
+  <div class="container">
+    <div class="logo">
+      <img
+        alt="logo"
+        src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
+      />
+      <div class="logo-text">Arco Design Pro</div>
+    </div>
+    <LoginBanner />
+    <div class="content">
+      <div class="content-inner">
+        <LoginForm />
+      </div>
+      <div class="footer">
+        <Footer />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import {reactive, ref} from 'vue'
-import {useMessage} from 'naive-ui'
-import {useUserStore} from "@/store/modules/user";
-import {ResultEnum} from "@/enums/httpEnum";
-import {useRoute, useRouter} from "vue-router";
-import {PageEnum} from "@/enums/pageEnum";
-
-const formRef = ref();
-const size = ref<'small' | 'medium' | 'large'>('medium')
-const rules = {
-  username: {required: true, message: '请输入用户名', trigger: 'blur'},
-  password: {required: true, message: '请输入密码', trigger: 'blur'},
-};
-const formValue = reactive({
-  email: '',
-  password: '',
-  isCaptcha: true,
-})
-const loading = ref(false);
-const message = useMessage();
-const userStore = useUserStore();
-const route = useRoute();
-const router = useRouter();
-const LOGIN_NAME = PageEnum.BASE_LOGIN_NAME;
-
-function handleLoginClick(e: KeyboardEvent): void {
-  e.preventDefault();
-  formRef.value.validate(async (errors: any) => {
-    if (!errors) {
-      message.loading('登录中...');
-      loading.value = true;
-      try {
-        const {errno, errmsg} = await userStore.login(formValue);
-        message.destroyAll();
-        if (errno == ResultEnum.SUCCESS) {
-          const toPath = decodeURIComponent((route.query?.redirect || '/') as string);
-          message.success('登录成功，即将进入系统');
-          if (route.name === LOGIN_NAME) {
-            await router.replace('/');
-          } else await router.replace(toPath);
-        } else {
-          message.info(errmsg || '登录失败');
-        }
-      } finally {
-        loading.value = false
-      }
-    } else {
-      message.error('请填写完整信息，并且进行验证码校验');
-    }
-  })
-}
+  import Footer from '@/components/footer/index.vue';
+  import LoginBanner from './components/banner.vue';
+  import LoginForm from './components/login-form.vue';
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+  .container {
+    display: flex;
+    height: 100vh;
 
+    .banner {
+      width: 550px;
+      background: linear-gradient(163.85deg, #1d2129 0%, #00308f 100%);
+    }
+
+    .content {
+      position: relative;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 40px;
+    }
+
+    .footer {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+
+  .logo {
+    position: fixed;
+    top: 24px;
+    left: 22px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+
+    &-text {
+      margin-right: 4px;
+      margin-left: 4px;
+      color: var(--color-fill-1);
+      font-size: 20px;
+    }
+  }
+</style>
+
+<style lang="less" scoped>
+  // responsive
+  @media (max-width: @screen-lg) {
+    .container {
+      .banner {
+        width: 25%;
+      }
+    }
+  }
 </style>
