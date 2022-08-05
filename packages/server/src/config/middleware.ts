@@ -1,3 +1,5 @@
+import {log} from "next-axiom";
+
 const cors = require('@koa/cors');
 const routerREST = require('think-router-rest');
 const isDev = think.env === 'development';
@@ -32,8 +34,7 @@ export default [
         if (/favicon.ico$/.test(ctx.url)) {
           return;
         }
-        // tslint:disable-next-line:no-console
-        console.error(err);
+        log.error(err);
       },
     },
   },
