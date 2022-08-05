@@ -5,8 +5,18 @@ interface MongodbInstance {
     limit(offset: number, limit: number): void;
     field(field: any): void;
     select(): Promise<any>;
+    add(entity: any): Promise<any>;
 }
 export default class Mongodb extends Base<MongodbInstance> {
+    public async add(entity: any): Promise<any> {
+        if (entity.objectId) {
+            entity._id = entity.objectId;
+            delete entity.objectId;
+        }
+        const instance = this.mongo(this.tableName);
+        const id = await instance.add(entity);
+        return { ...entity, objectId: id.toString() };
+    }
     async select(where: any, {desc, limit, offset, field}: any = {}): Promise<any> {
         const instance = this.mongo(this.tableName);
         this.where(instance, where);

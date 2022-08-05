@@ -6,4 +6,5 @@ export default abstract  class Base<M = any> extends think.Service {
         this.tableName = tableName;
     }
     public abstract select<T>(where: any, {}?: any): Promise<T>;
+    public abstract add<T>(entity: T): Promise<T>;
 }

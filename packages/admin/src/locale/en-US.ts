@@ -27,6 +27,7 @@ import localeUserInfo from '@/views/user/info/locale/en-US';
 import localeUserSetting from '@/views/user/setting/locale/en-US';
 /** simple end */
 import localeSettings from './en-US/settings';
+import articleSettings from './en-US/article';
 
 export default {
   'menu.dashboard': 'Dashboard',
@@ -45,6 +46,7 @@ export default {
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',
   ...localeSettings,
+  ...articleSettings,
   ...localeMessageBox,
   ...localeLogin,
   ...localeWorkplace,
