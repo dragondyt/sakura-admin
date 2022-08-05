@@ -4,7 +4,7 @@ import {log} from "next-axiom";
 export default class Article extends BaseController {
     constructor(ctx: ThinkContext) {
         super(ctx);
-        this.modelInstance = this.service(`storage/mongodb`, 'articles');
+        this.modelInstance = this.service(`storage/${this.config('storage')}`, 'articles');
     }
 
     protected async postAction(): Promise<void> {

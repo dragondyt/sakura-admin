@@ -7,7 +7,10 @@ interface MongodbInstance {
     select(): Promise<any>;
     add(entity: any): Promise<any>;
 }
-export default class Mongodb extends Base<MongodbInstance> {
+export default class Mongodb extends Base<MongodbInstance, any> {
+    public update(entity: any, where?: Record<string, any>): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
     public async add(entity: any): Promise<any> {
         if (entity.objectId) {
             entity._id = entity.objectId;

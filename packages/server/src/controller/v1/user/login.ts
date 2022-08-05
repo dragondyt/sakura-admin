@@ -4,7 +4,7 @@ import {generateToken} from "../../../utils/jwt";
 export default class Login extends BaseController {
     constructor(ctx: ThinkContext) {
         super(ctx);
-        this.modelInstance = this.service(`storage/mongodb`, 'users');
+        this.modelInstance = this.service(`storage/${this.config('storage')}`, 'users');
     }
     protected async getAction(): Promise<void> {
         return this.success("dgs");

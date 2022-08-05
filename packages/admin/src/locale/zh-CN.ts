@@ -28,6 +28,7 @@ import localeUserSetting from '@/views/user/setting/locale/zh-CN';
 /** simple end */
 import localeSettings from './zh-CN/settings';
 import articleSettings from "./zh-CN/article";
+import commentSettings from "./zh-CN/comment";
 
 export default {
   'menu.dashboard': '仪表盘',
@@ -47,6 +48,7 @@ export default {
   'navbar.action.locale': '切换为中文',
   ...localeSettings,
   ...articleSettings,
+  ...commentSettings,
   ...localeMessageBox,
   ...localeLogin,
   ...localeWorkplace,
