@@ -1,4 +1,4 @@
-import Base from "./base";
+import Base, { CountOption } from "./base";
 import {ACL, Cloud, init, Object as AVObject, Queriable, Query} from "leancloud-storage";
 import {log} from "next-axiom";
 import useMasterKey = Cloud.useMasterKey;
@@ -21,6 +21,12 @@ type LeanObjBase = Queriable & {
     mail: string;
 };
 export default class LeanCloud extends Base<any, LeanObjBase> {
+    public delete(where: Record<string, any>): Promise<number> {
+        throw new Error("Method not implemented.");
+    }
+    public count(where: Record<string, any>, options?: CountOption): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
     async add<T>(data: LeanObjBase, {
         access: {read = true, write = true} = {
             read: true,

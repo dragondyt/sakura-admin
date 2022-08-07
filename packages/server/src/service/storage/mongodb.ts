@@ -1,13 +1,25 @@
-import Base from "./base";
+import Base, { CountOption } from "./base";
 import {ObjectId} from "mongodb";
+
 interface MongodbInstance {
     order(order: string): void;
+
     limit(offset: number, limit: number): void;
+
     field(field: any): void;
+
     select(): Promise<any>;
+
     add(entity: any): Promise<any>;
 }
+
 export default class Mongodb extends Base<MongodbInstance, any> {
+    public delete(where: Record<string, any>): Promise<number> {
+        throw new Error("Method not implemented.");
+    }
+    public count(where: Record<string, any>, options?: CountOption): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
     public update(entity: any, where?: Record<string, any>): Promise<any> {
         throw new Error("Method not implemented.");
     }
