@@ -1,11 +1,9 @@
 import Base, { CountOption } from "./base";
 import {ACL, Cloud, init, Object as AVObject, Queriable, Query} from "leancloud-storage";
-import {log} from "next-axiom";
 import useMasterKey = Cloud.useMasterKey;
 
 const {LEAN_ID, LEAN_KEY, LEAN_MASTER_KEY, LEAN_SERVER} = process.env;
 if (LEAN_ID && LEAN_KEY && LEAN_MASTER_KEY) {
-    log.debug("使用leancloud-storage");
     useMasterKey();
     init({
         appId: LEAN_ID,

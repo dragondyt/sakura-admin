@@ -12,7 +12,8 @@ export default class Info extends BaseController {
             return this.fail(50008, "未登录");
         } else {
             return this.success({
-                email: 'wangliqun@email.com'
+                email: 'wangliqun@email.com',
+                avatar: '',
             });
         }
     }

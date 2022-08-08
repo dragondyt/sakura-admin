@@ -1,6 +1,8 @@
 import 'thinkjs3-ts';
 import Axiom from "../log/axiom";
 import Mysql from "think-model-mysql";
+import Postgresql from "think-model-postgresql";
+// import Sqlite from "think-model-sqlite";
 
 export const logger = {
     type: 'axiom',
@@ -24,12 +26,26 @@ const {
     MYSQL_PREFIX,
     MYSQL_CHARSET,
     MYSQL_SSL,
+    PG_USER,
+    PG_PASSWORD,
+    PG_DB,
+    PG_HOST,
+    PG_PORT,
+    PG_PREFIX,
+    PG_SSL,
+    SQLITE_PATH,
+    SQLITE_DB,
+    SQLITE_PREFIX,
 } = process.env;
 
 let type = 'common';
 const mongoOpt: Record<string, any> = {};
-if (MONGO_REPLICASET) { mongoOpt.replicaSet = MONGO_REPLICASET; }
-if (MONGO_AUTHSOURCE) { mongoOpt.authSource = MONGO_AUTHSOURCE; }
+if (MONGO_REPLICASET) {
+    mongoOpt.replicaSet = MONGO_REPLICASET;
+}
+if (MONGO_AUTHSOURCE) {
+    mongoOpt.authSource = MONGO_AUTHSOURCE;
+}
 if (MONGO_DB) {
     type = 'mongo';
     for (const envKeys in process.env) {
@@ -43,6 +59,10 @@ if (MONGO_DB) {
     }
 } else if (MYSQL_DB) {
     type = 'mysql';
+} else if (PG_DB) {
+    type = 'postgresql';
+} else if (SQLITE_PATH) {
+    type = 'sqlite';
 }
 export const model = {
     type,
@@ -83,4 +103,28 @@ export const model = {
                 }
                 : null,
     },
+    postgresql: {
+        handle: Postgresql,
+        user: PG_USER,
+        password: PG_PASSWORD,
+        database: PG_DB,
+        host: PG_HOST || '127.0.0.1',
+        port: PG_PORT || '3211',
+        connectionLimit: 1,
+        prefix: PG_PREFIX || 'wl_',
+        ssl:
+            PG_SSL === 'true'
+                ? {
+                    rejectUnauthorized: false,
+                }
+                : null,
+    },
+  /*  sqlite: {
+        handle: Sqlite,
+        path: SQLITE_PATH,
+        database: SQLITE_DB || 'waline',
+        connectionLimit: 1,
+        prefix: SQLITE_PREFIX || 'wl_',
+    },*/
+
 };
