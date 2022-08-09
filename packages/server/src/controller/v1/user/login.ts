@@ -1,19 +1,12 @@
 import BaseController from "../../rest";
-import helper from 'think-helper';
 import {generateToken} from "../../../utils/jwt";
-import {compareSync, genSaltSync, hashSync} from 'bcryptjs';
-import {log} from "next-axiom";
+import {compareSync} from 'bcryptjs';
 
 export default class Login extends BaseController {
     constructor(ctx: ThinkContext) {
         super(ctx);
         this.modelInstance = this.service(`storage/${this.config('storage')}`, 'Users');
     }
-
-    protected async getAction(): Promise<void> {
-        return this.success("dgs");
-    }
-
     protected async postAction(): Promise<void> {
         const {username, password} = this.post();
         const user = await this.modelInstance.select({email: username});
@@ -24,7 +17,7 @@ export default class Login extends BaseController {
             return this.fail(50000, "账号或者密码错误");
         }
         return this.success({
-            token: await generateToken(),
+            token: await generateToken(user[0].email),
         });
     }
 }
