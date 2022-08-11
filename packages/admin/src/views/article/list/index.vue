@@ -39,6 +39,7 @@ function save (e: any) {
 onMounted(() => {
   vditor.value = new Vditor('vditor', {
     height: '100%',
+    width: '100%',
     theme: isDark ? "dark" : "classic",
     after: () => {
       vditor.value!.setValue('');

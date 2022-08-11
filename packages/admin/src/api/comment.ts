@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export default function listComment(data: any) {
-    return axios.post<any>('/v1/comment/list', data);
+export default function listComment(params: any) {
+    return axios.get<any>('/v1/comment/list', {params});
 }

@@ -1,5 +1,5 @@
 import Base, { CountOption } from "./base";
-import {ACL, Cloud, init, Object as AVObject, Queriable, Query} from "leancloud-storage";
+import {ACL, AuthOptions, Cloud, init, Object as AVObject, Queriable, Query} from "leancloud-storage";
 import useMasterKey = Cloud.useMasterKey;
 
 const {LEAN_ID, LEAN_KEY, LEAN_MASTER_KEY, LEAN_SERVER} = process.env;
@@ -22,8 +22,94 @@ export default class LeanCloud extends Base<any, LeanObjBase> {
     public delete(where: Record<string, any>): Promise<number> {
         throw new Error("Method not implemented.");
     }
-    public count(where: Record<string, any>, options?: CountOption): Promise<any> {
-        throw new Error("Method not implemented.");
+    public async count(where: Record<string, any>, options?: CountOption & AuthOptions): Promise<any> {
+
+        const instance = this.where(this.tableName, where);
+
+        if (!options.group) {
+            return instance.count(options).catch((e) => {
+                if (e.code === 101) {
+                    return 0;
+                }
+                throw e;
+            });
+        }
+
+        // get group count cache by group field where data
+        const cacheData = await this._getCmtGroupByMailUserIdCache(
+            options.group.join('_'),
+            where
+        );
+        const cacheDataMap = {};
+
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < cacheData.length; i++) {
+            const key = options.group
+                .map((item) => cacheData[i][item] || undefined)
+                .join('_');
+
+            cacheDataMap[key] = cacheData[i];
+        }
+
+        const counts: any[] = [];
+        const countsPromise = [];
+
+        for (let i = 0; i < options.group.length; i++) {
+            const groupName = options.group[i];
+
+            if (!where._complex || !Array.isArray(where._complex[groupName])) {
+                continue;
+            }
+
+            const groupFlatValue = {};
+
+            options.group.slice(0, i).forEach((group) => {
+                groupFlatValue[group] = undefined;
+            });
+
+            // tslint:disable-next-line:prefer-for-of
+            for (let j = 0; j < where._complex[groupName][1].length; j++) {
+                const cacheKey = options.group
+                    .map(
+                        (item) =>
+                            ({
+                                ...groupFlatValue,
+                                [groupName]: where._complex[groupName][1][j],
+                            }[item] || undefined)
+                    )
+                    .join('_');
+
+                if (cacheDataMap[cacheKey]) {
+                    continue;
+                }
+
+                const groupWhere: any = {
+                    ...where,
+                    ...groupFlatValue,
+                    _complex: undefined,
+                    [groupName]: where._complex[groupName][1][j],
+                };
+                const countPromise = this.count(groupWhere, {
+                    ...options,
+                    group: undefined,
+                }).then((num) => {
+                    counts.push({
+                        ...groupFlatValue,
+                        [groupName]: where._complex[groupName][1][j],
+                        count: num,
+                    });
+                });
+
+                countsPromise.push(countPromise);
+            }
+        }
+
+        await think.promiseAllQueue(countsPromise, 1);
+        // cache data
+        await this._setCmtGroupByMailUserIdCache(options.group.join('_'), counts);
+
+        return [...cacheData, ...counts];
+
     }
     async add<T>(data: LeanObjBase, {
         access: {read = true, write = true} = {
@@ -256,5 +342,9 @@ export default class LeanCloud extends Base<any, LeanObjBase> {
         }
 
         return instance;
+    }
+
+    private async _getCmtGroupByMailUserIdCache(s: string, where: Record<string, any>) {
+
     }
 }
