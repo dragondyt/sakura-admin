@@ -103,8 +103,8 @@ export default class LeanCloud extends Base<any, LeanObjBase> {
                 countsPromise.push(countPromise);
             }
         }
-
-        await think.promiseAllQueue(countsPromise, 1);
+        await Promise.all(countsPromise);
+        // await think.promiseAllQueue(, 1);
         // cache data
         await this._setCmtGroupByMailUserIdCache(options.group.join('_'), counts);
 
@@ -344,7 +344,11 @@ export default class LeanCloud extends Base<any, LeanObjBase> {
         return instance;
     }
 
-    private async _getCmtGroupByMailUserIdCache(s: string, where: Record<string, any>) {
+    private async _getCmtGroupByMailUserIdCache(s: string, where: Record<string, any>): Promise<any[]> {
+        return [];
+    }
+
+    private async _setCmtGroupByMailUserIdCache(s: string, counts: any[]) {
 
     }
 }
