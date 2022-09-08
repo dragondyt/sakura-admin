@@ -14,15 +14,15 @@ export default class BaseController extends think.Controller {
         return this.json({
             data,
             status: 'ok',
-            msg: message || '请求成功',
+            message: message || '请求成功',
             code: 20000,
         });
     }
     fail(errno: any, errmsg?: string, data?: any): any {
         return this.json({
             data,
-            status: 'fail',
-            msg: errmsg,
+            status: 'error',
+            message: errmsg,
             code: errno,
         });
     }

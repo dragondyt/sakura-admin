@@ -2,7 +2,8 @@ import "vditor/dist/index.css";
 import React from "react";
 import Vditor from "vditor";
 import {PageContainer} from "@ant-design/pro-components";
-import {Button} from "antd";
+import { Button, notification } from 'antd';
+import {saveArticle} from "@/services/ant-design-pro/article";
 
 const ArticleCreate: React.FC = () => {
   const [,setVd] = React.useState<Vditor>();
@@ -27,7 +28,19 @@ const ArticleCreate: React.FC = () => {
 
   function handleSubmit(type: number = 0) {
     try {
-
+      saveArticle({
+        content: article.content
+      }).then(res=>{
+        if (res.status === 'ok') {
+          notification.success({
+            message: res.message,
+          });
+        } else {
+          notification.error({
+            message: res.message,
+          });
+        }
+      })
     } catch (e) {
 
     }
@@ -37,7 +50,7 @@ const ArticleCreate: React.FC = () => {
   return (
     <PageContainer extra={
       [
-        <Button key="1" onClick={() => handleSubmit()}>保存草稿</Button>,
+        <Button key="1" onClick={() => handleSubmit(1)}>保存草稿</Button>,
         <Button key="2" onClick={() => handleSubmit(0)}>发布文章</Button>,
       ]
     }>

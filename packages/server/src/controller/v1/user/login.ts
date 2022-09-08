@@ -7,17 +7,23 @@ export default class Login extends BaseController {
         super(ctx);
         this.modelInstance = this.service(`storage/${this.config('storage')}`, 'Users');
     }
+
     protected async postAction(): Promise<void> {
-        const {username, password} = this.post();
+        const {username, password, type} = this.post();
         const user = await this.modelInstance.select({email: username});
-        if (think.isEmpty(user) || /^verify:/i.test(user[0].type)) {
-            return this.fail(50000, "账号或者密码错误");
+        if (think.isEmpty(user) || /^verify:/i.test(user[0].type) || !compareSync(password, user[0].password)) {
+            return this.json({
+                status: 'error',
+                type,
+                currentAuthority: 'guest',
+            });
         }
-        if (!compareSync(password, user[0].password)) {
-            return this.fail(50000, "账号或者密码错误");
-        }
-        return this.success({
-            token: await generateToken(user[0].email),
+        return this.json({
+            status: 'ok',
+            type, currentAuthority: 'admin'
         });
+        // return this.success({
+        //     token: await generateToken(user[0].email),
+        // });
     }
 }
