@@ -23,7 +23,7 @@ export default class BaseLogic extends think.Logic {
         const {authorization} = this.ctx.req.headers;
         const {state} = this.get();
         if (!authorization && !state) {
-            return;
+            return this.ctx.throw(401);
         }
         const token = state || authorization.replace(/^Bearer /, '');
         const {payload} = await VerifyToken(token);

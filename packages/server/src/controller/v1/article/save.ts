@@ -6,7 +6,9 @@ export default class Save extends BaseController {
     }
 
     protected async postAction(): Promise<void> {
-        const {content, password, type} = this.post();
+        const {content} = this.post();
+        think.logger.debug("保存文章");
+        think.logger.info(content);
         await this.modelInstance.add({
             content
         });

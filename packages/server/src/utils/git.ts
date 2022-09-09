@@ -10,10 +10,13 @@ export default class Git {
         this.token = token;
     }
 
-    async set(filename: string, content: string, {sha}: { sha?: string } = {}) {
+    async set(filename: string, content: string, {
+        sha,
+        message
+    }: { sha?: string; message: string } = {message: 'add file'}): Promise<any> {
         return axios.put('https://api.github.com/repos/' + path.join(this.repo, 'contents', filename), JSON.stringify({
             sha,
-            message: 'feat(waline): update comment data',
+            message,
             content: Buffer.from(content, 'utf-8').toString('base64'),
         }), {
             headers: {

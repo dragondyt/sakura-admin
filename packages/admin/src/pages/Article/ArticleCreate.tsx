@@ -21,6 +21,9 @@ const ArticleCreate: React.FC = () => {
         setArticle({
           content: value
         })
+      },
+      upload: {
+        url: "/v1/file/upload"
       }
     });
   }, []);

@@ -44,6 +44,7 @@ export default [
     options: {
       keepExtensions: true,
       limit: '5mb',
+      multiples: true
     },
   },
 

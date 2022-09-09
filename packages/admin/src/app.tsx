@@ -1,12 +1,13 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
-import { LinkOutlined } from '@ant-design/icons';
-import type { Settings as LayoutSettings } from '@ant-design/pro-components';
-import { SettingDrawer } from '@ant-design/pro-components';
-import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history, Link } from '@umijs/max';
+import {LinkOutlined} from '@ant-design/icons';
+import type {Settings as LayoutSettings} from '@ant-design/pro-components';
+import {SettingDrawer} from '@ant-design/pro-components';
+import type {RunTimeLayoutConfig} from '@umijs/max';
+import {history, Link} from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import {currentUser as queryCurrentUser} from './services/ant-design-pro/api';
+import {RequestConfig} from "@@/plugin-request/request";
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -46,16 +47,16 @@ export async function getInitialState(): Promise<{
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 // @ts-ignore
-export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => {
   return {
-    rightContentRender: () => <RightContent />,
+    rightContentRender: () => <RightContent/>,
     disableContentMargin: false,
     waterMarkProps: {
       content: initialState?.currentUser?.name,
     },
-    footerRender: () => <Footer />,
+    footerRender: () => <Footer/>,
     onPageChange: () => {
-      const { location } = history;
+      const {location} = history;
       console.log(history);
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
@@ -64,11 +65,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     links: isDev
       ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
-        ]
+        <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+          <LinkOutlined/>
+          <span>OpenAPI 文档</span>
+        </Link>,
+      ]
       : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
@@ -98,3 +99,21 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     ...initialState?.settings,
   };
 };
+
+export const request: RequestConfig = {
+  // 请求拦截器
+  requestInterceptors: [
+    // 直接写一个 function，作为拦截器
+    (url, options) => {
+      if (localStorage.getItem('token')) {
+        const token = localStorage.getItem('token');
+        options.headers = {
+          ...options.headers,
+          "Authorization": token || '',
+        }
+      }
+      // do something
+      return {url, options}
+    },
+  ],
+}

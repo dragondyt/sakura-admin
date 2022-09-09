@@ -16,7 +16,7 @@ export default class Github extends Base {
     }
     public add(entity: any, options?: any): Promise<any> {
         log.debug('测试');
-        return this.git.set("package.json", entity, entity.sha);
+        return this.git.set("package.json", entity, entity);
     }
     public update(entity: any, where?: Record<string, any>): Promise<any> {
         throw new Error("Method not implemented.");
