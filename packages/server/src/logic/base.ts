@@ -64,6 +64,8 @@ export default class BaseLogic extends think.Logic {
             avatarUrl = avatarProxy + '?url=' + encodeURIComponent(avatarUrl);
         }
         userInfo.avatar = avatarUrl;
+        userInfo.name = userInfo.display_name;
+        userInfo.userid = userInfo.id;
         userInfo.mailMd5 = md5(userInfo.email);
         this.ctx.state.userInfo = userInfo;
         this.ctx.state.token = token;

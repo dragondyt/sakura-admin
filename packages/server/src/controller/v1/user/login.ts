@@ -20,7 +20,8 @@ export default class Login extends BaseController {
         }
         return this.json({
             status: 'ok',
-            type, currentAuthority: 'admin'
+            type, currentAuthority: 'admin',
+            token: await generateToken(user[0].email),
         });
         // return this.success({
         //     token: await generateToken(user[0].email),
