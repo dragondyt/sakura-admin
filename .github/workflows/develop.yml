@@ -35,7 +35,7 @@ jobs:
 
       - name: Build blog site
         env:
-          BASE_PATH: /
+          BASE_PATH: /sakura-admin
         run: pnpm build
 
       - name: Deploy to GitHub Pages

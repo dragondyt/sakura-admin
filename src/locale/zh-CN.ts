@@ -4,7 +4,6 @@ import localeLogin from '@/views/login/locale/zh-CN';
 import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
 
 import localeSettings from './zh-CN/settings';
-
 import blogSettings from './zh-CN/blog';
 
 export default {
