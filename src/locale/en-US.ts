@@ -5,6 +5,8 @@ import localeWorkplace from '@/views/dashboard/workplace/locale/en-US';
 
 import localeSettings from './en-US/settings';
 
+import blogSettings from './en-US/blog';
+
 export default {
   'menu.dashboard': 'Dashboard',
   'menu.server.dashboard': 'Dashboard-Server',
@@ -22,6 +24,7 @@ export default {
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',
   ...localeSettings,
+  ...blogSettings,
   ...localeMessageBox,
   ...localeLogin,
   ...localeWorkplace,

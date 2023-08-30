@@ -5,6 +5,8 @@ import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
 
 import localeSettings from './zh-CN/settings';
 
+import blogSettings from './zh-CN/blog';
+
 export default {
   'menu.dashboard': '仪表盘',
   'menu.server.dashboard': '仪表盘-服务端',
@@ -22,6 +24,7 @@ export default {
   'navbar.docs': '文档中心',
   'navbar.action.locale': '切换为中文',
   ...localeSettings,
+  ...blogSettings,
   ...localeMessageBox,
   ...localeLogin,
   ...localeWorkplace,

@@ -1,0 +1,48 @@
+name: GitHub Pages Deploy
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  blog-build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: '16'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 8.6.7
+          run_install: true
+
+      - name: Build blog site
+        env:
+          BASE_PATH: /
+        run: pnpm build
+
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2.6.0
+        with:
+          target_branch: gh-pages
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
