@@ -8,7 +8,8 @@ export interface LoginData {
 }
 
 export interface LoginRes {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
 }
 export function login(data: LoginData) {
   return axios.post<LoginRes>('/api/user/login', data);
