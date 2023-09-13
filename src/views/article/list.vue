@@ -90,19 +90,19 @@
     <a-table :data="articleList">
       <template #columns>
         <a-table-column title="ID" data-index="objectId" />
-        <a-table-column title="缩略图" align="center">
+        <a-table-column title="缩略图" align="center" :width="180">
           <template #cell="{ record }">
-            <a-image class="article-cover" :src="record.cover" />
+            <a-image class="article-cover" :src="record.articleCover" />
           </template>
         </a-table-column>
         <!-- 文章标题 -->
         <a-table-column
-          data-index="title"
+          data-index="articleTitle"
           title="标题"
           align="center"
         ></a-table-column>
         <!-- 创建时间 -->
-        <a-table-column title="创建事件">
+        <a-table-column title="创建时间">
           <template #cell="{ record }">
             {{ dayjs(record.createdAt).format('YYYY-MM-DD HH:mm:ss') }}
           </template>

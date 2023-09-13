@@ -8,7 +8,7 @@
   } from 'md-editor-v3';
   import 'md-editor-v3/lib/style.css';
   import { useAppStore } from '@/store';
-  import {useDateFormat, useFullscreen} from '@vueuse/core';
+  import { useDateFormat, useFullscreen } from '@vueuse/core';
   import {
     FormInstance,
     Message,
@@ -26,6 +26,8 @@
   import container from 'markdown-it-container';
   import { Completion, CompletionSource } from '@codemirror/autocomplete';
   import { EditorSelection } from '@codemirror/state';
+  import axios from 'axios';
+  import { getToken } from '@/utils/auth';
 
   config({
     editorConfig: {
@@ -129,6 +131,10 @@
       view.focus();
     };
   };
+  let baseApi = '/api';
+  if (import.meta.env.VITE_API_BASE_URL) {
+    baseApi = import.meta.env.VITE_API_BASE_URL + baseApi;
+  }
 
   const completions = ref<Array<CompletionSource>>([
     (context: any) => {
@@ -259,7 +265,7 @@
       },
     ],
     articleForm: {
-      id: undefined,
+      objectId: undefined,
       articleCover: '',
       articleTitle: articleTitle.value,
       articleContent: '',
@@ -307,7 +313,7 @@
   const submitForm = () => {
     articleFormRef.value?.validate((errors) => {
       if (!errors) {
-        if (articleForm.value.id) {
+        if (articleForm.value.objectId) {
           updateArticle(articleForm.value).then(({ data }) => {
             if (data.flag) {
               Notification.success({
@@ -357,9 +363,10 @@
       }
     });
   };
+  const fileList = reactive<any>([]);
 
   const handleSuccess = (fileItem: FileItem) => {
-    articleForm.value.articleCover = fileItem.response.data;
+    articleForm.value.articleCover = fileItem.response.data.url;
   };
 
   onMounted(() => {
@@ -367,6 +374,11 @@
       editArticle(articleId as string).then(({ data }) => {
         if (data.flag) {
           articleForm.value = data.data;
+          fileList.push({
+            uid: '-2',
+            name: '20200717-103937.png',
+            url: data.data.articleCover,
+          });
         } else {
           router.push({ path: '/article/list' });
         }
@@ -469,7 +481,7 @@
             >{{ item }}
           </a-tag>
           <a-popover
-            v-if="articleForm.tagNameList.length < 3"
+            v-if="articleForm.tagNameList?.length < 3"
             placement="bottom-start"
             width="460"
             trigger="click"
@@ -496,17 +508,19 @@
         <!-- 缩略图 -->
         <a-form-item label="缩略图" prop="articleCover">
           <a-upload
+            :limit="1"
+            list-type="picture-card"
             draggable
             accept="image/*"
-            action="/api/article/upload"
+            :action="`${baseApi}/file/upload`"
+            :headers="{
+              Authorization: getToken() == null ? '' : getToken() as string,
+            }"
+            :file-list="fileList"
+            :default-file-list="fileList"
+            image-preview
             @success="handleSuccess"
-          >
-            <img
-              v-if="articleForm.articleCover"
-              :src="articleForm.articleCover"
-              width="360"
-            />
-          </a-upload>
+          ></a-upload>
         </a-form-item>
         <!-- 置顶 -->
         <a-form-item label="置顶" prop="isTop">
