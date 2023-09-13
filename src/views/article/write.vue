@@ -322,7 +322,7 @@
               });
               router.push({ path: '/article/list' });
               articleForm.value = {
-                id: undefined,
+                objectId: undefined,
                 articleCover: '',
                 articleTitle: articleTitle.value,
                 articleContent: '',
@@ -345,7 +345,7 @@
               });
               router.push({ path: '/article/list' });
               articleForm.value = {
-                id: undefined,
+                objectId: undefined,
                 articleCover: '',
                 articleTitle: articleTitle.value,
                 articleContent: '',
@@ -363,7 +363,7 @@
       }
     });
   };
-  const fileList = reactive<any>([]);
+  const fileList = reactive<FileItem[]>([]);
 
   const handleSuccess = (fileItem: FileItem) => {
     articleForm.value.articleCover = fileItem.response.data.url;

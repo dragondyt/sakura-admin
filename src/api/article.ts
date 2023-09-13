@@ -12,7 +12,7 @@ export interface ArticleForm {
   /**
    * 文章id
    */
-  id?: number;
+  objectId?: number;
   /**
    * 文章缩略图
    */
