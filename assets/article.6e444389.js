@@ -1,0 +1,1 @@
+import{g as e}from"./index.c20030b9.js";function a(t){return e.post("/api/article",t)}function r(t){return e.get(`/api/article/${t}`)}function c(t){return e.put("/api/article/update",{data:t})}function n(t){return e.delete("/api/article",{data:{ids:t}})}function u(t){return e.get("/api/article",{params:t})}export{a,n as d,r as e,u as g,c as u};
