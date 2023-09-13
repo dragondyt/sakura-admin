@@ -101,10 +101,10 @@ devDependencies:
     version: 5.58.0(eslint@8.38.0)(typescript@4.9.5)
   '@vitejs/plugin-vue':
     specifier: ^3.1.2
-    version: 3.2.0(vite@3.2.5)(vue@3.2.47)
+    version: 3.2.0(vite@3.2.7)(vue@3.2.47)
   '@vitejs/plugin-vue-jsx':
     specifier: ^2.0.1
-    version: 2.1.1(vite@3.2.5)(vue@3.2.47)
+    version: 2.1.1(vite@3.2.7)(vue@3.2.47)
   '@vue/babel-plugin-jsx':
     specifier: ^1.1.1
     version: 1.1.1(@babel/core@7.21.4)
@@ -181,17 +181,17 @@ devDependencies:
     specifier: ^0.24.1
     version: 0.24.1(rollup@2.79.1)(vue@3.2.47)
   vite:
-    specifier: ^3.2.5
-    version: 3.2.5(@types/node@18.15.11)(less@4.1.3)
+    specifier: ^3.2.7
+    version: 3.2.7(@types/node@18.15.11)(less@4.1.3)
   vite-plugin-compression:
     specifier: ^0.5.1
-    version: 0.5.1(vite@3.2.5)
+    version: 0.5.1(vite@3.2.7)
   vite-plugin-eslint:
     specifier: ^1.8.1
-    version: 1.8.1(eslint@8.38.0)(vite@3.2.5)
+    version: 1.8.1(eslint@8.38.0)(vite@3.2.7)
   vite-plugin-imagemin:
     specifier: ^0.6.1
-    version: 0.6.1(vite@3.2.5)
+    version: 0.6.1(vite@3.2.7)
   vite-svg-loader:
     specifier: ^3.6.0
     version: 3.6.0
@@ -1668,7 +1668,7 @@ packages:
     resolution: {integrity: sha512-g/20ugYpM09EpzvGvLPUReEo3fPBefq810NYR31EZwPozZvymkPs1pM1A60GfG0wlQq35iiWoV6HHTyDy/FbwA==}
     dev: false
 
-  /@vitejs/plugin-vue-jsx@2.1.1(vite@3.2.5)(vue@3.2.47):
+  /@vitejs/plugin-vue-jsx@2.1.1(vite@3.2.7)(vue@3.2.47):
     resolution: {integrity: sha512-JgDhxstQlwnHBvZ1BSnU5mbmyQ14/t5JhREc6YH5kWyu2QdAAOsLF6xgHoIWarj8tddaiwFrNzLbWJPudpXKYA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -1678,20 +1678,20 @@ packages:
       '@babel/core': 7.21.4
       '@babel/plugin-transform-typescript': 7.21.3(@babel/core@7.21.4)
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.21.4)
-      vite: 3.2.5(@types/node@18.15.11)(less@4.1.3)
+      vite: 3.2.7(@types/node@18.15.11)(less@4.1.3)
       vue: 3.2.47
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@vitejs/plugin-vue@3.2.0(vite@3.2.5)(vue@3.2.47):
+  /@vitejs/plugin-vue@3.2.0(vite@3.2.7)(vue@3.2.47):
     resolution: {integrity: sha512-E0tnaL4fr+qkdCNxJ+Xd0yM31UwMkQje76fsDVBBUCoGOUPexu2VDUYHL8P4CwV+zMvWw6nlRw19OnRKmYAJpw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.5(@types/node@18.15.11)(less@4.1.3)
+      vite: 3.2.7(@types/node@18.15.11)(less@4.1.3)
       vue: 3.2.47
     dev: true
 
@@ -5020,6 +5020,7 @@ packages:
   /iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dependencies:
       safer-buffer: 2.1.2
     dev: true
@@ -7247,6 +7248,7 @@ packages:
 
   /prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -7662,11 +7664,13 @@ packages:
 
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+    requiresBuild: true
     dev: true
     optional: true
 
   /sax@1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -8959,7 +8963,7 @@ packages:
       vfile-message: 1.1.1
     dev: true
 
-  /vite-plugin-compression@0.5.1(vite@3.2.5):
+  /vite-plugin-compression@0.5.1(vite@3.2.7):
     resolution: {integrity: sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg==}
     peerDependencies:
       vite: '>=2.0.0'
@@ -8967,12 +8971,12 @@ packages:
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 10.1.0
-      vite: 3.2.5(@types/node@18.15.11)(less@4.1.3)
+      vite: 3.2.7(@types/node@18.15.11)(less@4.1.3)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite-plugin-eslint@1.8.1(eslint@8.38.0)(vite@3.2.5):
+  /vite-plugin-eslint@1.8.1(eslint@8.38.0)(vite@3.2.7):
     resolution: {integrity: sha512-PqdMf3Y2fLO9FsNPmMX+//2BF5SF8nEWspZdgl4kSt7UvHDRHVVfHvxsD7ULYzZrJDGRxR81Nq7TOFgwMnUang==}
     peerDependencies:
       eslint: '>=7'
@@ -8982,10 +8986,10 @@ packages:
       '@types/eslint': 8.37.0
       eslint: 8.38.0
       rollup: 2.79.1
-      vite: 3.2.5(@types/node@18.15.11)(less@4.1.3)
+      vite: 3.2.7(@types/node@18.15.11)(less@4.1.3)
     dev: true
 
-  /vite-plugin-imagemin@0.6.1(vite@3.2.5):
+  /vite-plugin-imagemin@0.6.1(vite@3.2.7):
     resolution: {integrity: sha512-cP7LDn8euPrji7WYtDoNQpJEB9nkMxJHm/A+QZnvMrrCSuyo/clpMy/T1v7suDXPBavsDiDdFdVQB5p7VGD2cg==}
     peerDependencies:
       vite: '>=2.0.0'
@@ -9013,7 +9017,7 @@ packages:
       imagemin-webp: 6.1.0
       jpegtran-bin: 6.0.1
       pathe: 0.2.0
-      vite: 3.2.5(@types/node@18.15.11)(less@4.1.3)
+      vite: 3.2.7(@types/node@18.15.11)(less@4.1.3)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -9025,8 +9029,8 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /vite@3.2.5(@types/node@18.15.11)(less@4.1.3):
-    resolution: {integrity: sha512-4mVEpXpSOgrssFZAOmGIr85wPHKvaDAcXqxVxVRZhljkJOMZi1ibLibzjLHzJvcok8BMguLc7g1W6W/GqZbLdQ==}
+  /vite@3.2.7(@types/node@18.15.11)(less@4.1.3):
+    resolution: {integrity: sha512-29pdXjk49xAP0QBr0xXqu2s5jiQIXNvE/xwd0vUizYT2Hzqe4BksNNoWllFVXJf4eLZ+UlVQmXfB4lWrc+t18g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
