@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkarco_design_pro=self.webpackChunkarco_design_pro||[]).push([[147],{4147:(n,e,r)=>{r.r(e),r.d(e,{default:()=>t});const t={banner:"banner--UzyO3",content:"content--OyXPd",right:"right--HLZb7",panel:"panel--cfmJn"}}}]);
+//# sourceMappingURL=147.36fd5f9a.chunk.js.map
